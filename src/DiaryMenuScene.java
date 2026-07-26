@@ -48,6 +48,11 @@ public class DiaryMenuScene {
             stage.setScene(writeScene);
         });
 
+        viewbutton.setOnAction(e -> {
+            Scene readScene = DiaryReadScene.createScene(stage);
+            stage.setScene(readScene);
+        });
+
         // Back button action
         backbutton.setOnAction(e -> {
             Scene homeScene = HomeScene.createScene(stage);
