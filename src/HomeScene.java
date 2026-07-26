@@ -6,6 +6,9 @@ import javafx.stage.Stage;
 public class HomeScene {
     
     public static Scene createScene(Stage stage) {
+        
+
+        
         VBox homelayoutBox = new VBox();
 
         Button diarybutton = new Button("Diary");
@@ -16,14 +19,19 @@ public class HomeScene {
         homelayoutBox.getChildren().addAll(diarybutton, goalbutton, oshibutton, backbutton);
 
 
+        
                 backbutton.setOnAction( e -> {
                 
             Scene mainmenu = MainMenuScene.createScene(stage);
             stage.setScene(mainmenu);
         });
+          
+        Scene scene = new Scene(homelayoutBox);
+        scene.getStylesheets().add("css/style.css");
+
 
   
-        return new Scene(homelayoutBox);
+        return scene;
     
     
 }
