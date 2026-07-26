@@ -1,4 +1,5 @@
 import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.stage.Stage; 
@@ -12,12 +13,20 @@ public class MainMenuScene {
         VBox mainmenusceneBox = new VBox();
 
         Button startButton = new Button("Start");
+       
+        HBox settingsBox = new HBox();
         Button settingsButton = new Button("Settings");
         Button exitButton = new Button("Exit");
 
         // Add buttons to the layout
-        mainmenusceneBox.getChildren().addAll(startButton, settingsButton, exitButton);
+        mainmenusceneBox.getChildren().addAll( startButton, settingsBox );
+        settingsBox.getChildren().addAll(settingsButton, exitButton);
 
+        mainmenusceneBox.setAlignment(javafx.geometry.Pos.CENTER);
+        settingsBox.setAlignment(javafx.geometry.Pos.CENTER);
+        
+        mainmenusceneBox.setSpacing(10);
+        settingsBox.setSpacing(10);
         //Once I have the buttons I will style them.
         
 
