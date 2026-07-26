@@ -43,6 +43,12 @@ public class HomeScene {
             Scene mainmenu = MainMenuScene.createScene(stage);
             stage.setScene(mainmenu);
         });
+
+        diarybutton.setOnAction( e -> {
+            Scene diarymenu = DiaryMenuScene.createScene(stage);
+            stage.setScene(diarymenu);
+        });
+
           
         Scene scene = new Scene(homelayoutBox);
         scene.getStylesheets().add("css/style.css");
