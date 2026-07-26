@@ -1,5 +1,9 @@
+import java.io.File;
+
 import javafx.application.Application;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
+
 
 public class App extends Application {
 
@@ -18,10 +22,14 @@ public class App extends Application {
         // Set the scene to the stage
         stage.setScene(MainMenuScene.createScene(stage));
 
-
+        stage.getIcons().add(
+        new Image(new File("resources/images/icon.png").toURI().toString())
+        );
 
         // Show the window
         stage.show();
+
+
     }
 
     public static void main(String[] args) {
