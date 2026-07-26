@@ -3,10 +3,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Insets;
-
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 
 public class DiaryWriteScene {
@@ -14,10 +16,18 @@ public class DiaryWriteScene {
     public static Scene createScene(Stage stage) {
 
         //Title 
-        Label title = new Label("New Entry");
+
+        String today = LocalDate.now().format(
+             DateTimeFormatter.ofPattern("dd/MM/yyyy") );
+
+        
+        Label title = new Label(today);
         title.setStyle("-fx-font-size: 40px; -fx-font-weight: bold;");
 
         // Writing area
+        TextField writingField = new TextField();
+        writingField.setPromptText("New Entry...");
+
         TextArea writingArea = new TextArea();
         writingArea.setPromptText("Dear Diary...");  
 
@@ -30,13 +40,15 @@ public class DiaryWriteScene {
         bottomArea.setSpacing(10);
 
         // Configure components
+        writingField.setPrefHeight(50);
         writingArea.setPrefHeight(400);
 
         // Button actions
         saveButton.setOnAction(e -> {
+            String entryTitle = writingField.getText();
             String entryText = writingArea.getText();
-            // Save the entry (you can implement the saving logic here)
-            System.out.println("Entry saved: " + entryText);
+            // Save the entry 
+            System.out.println("Entry saved: " + entryTitle + entryText);
             stage.setScene(DiaryMenuScene.createScene(stage)); // Go back to main scene
         });
 
@@ -46,7 +58,7 @@ public class DiaryWriteScene {
 
         // Main content
 
-        VBox layout = new VBox(20, title, writingArea, bottomArea);
+        VBox layout = new VBox(20, title, writingField, writingArea, bottomArea);
 
         // Main layout
 
