@@ -2,6 +2,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
 import javafx.scene.control.Button;
 import javafx.stage.Stage; 
+import javafx.scene.layout.HBox;
 
 public class HomeScene {
     
@@ -11,13 +12,30 @@ public class HomeScene {
         
         VBox homelayoutBox = new VBox();
 
+      homelayoutBox.setAlignment(javafx.geometry.Pos.CENTER);
+ 
+
+        HBox diarygoalsBox = new HBox();
+     diarygoalsBox.setAlignment(javafx.geometry.Pos.CENTER);
+
+
         Button diarybutton = new Button("Diary");
+        diarybutton.setPrefSize(125, 50);
+
         Button goalbutton = new Button("Goals");
+        goalbutton.setPrefSize(75, 50);
+
         Button oshibutton = new Button("Kanade");
+        oshibutton.setPrefSize(200, 100);
+
         Button backbutton = new Button("Back");
+        backbutton.setPrefSize(200, 50);
 
-        homelayoutBox.getChildren().addAll(diarybutton, goalbutton, oshibutton, backbutton);
-
+    homelayoutBox.setSpacing(10);
+ 
+        homelayoutBox.getChildren().addAll(diarygoalsBox, oshibutton, backbutton);
+        diarygoalsBox.getChildren().addAll(diarybutton, goalbutton);
+        
 
         
                 backbutton.setOnAction( e -> {
