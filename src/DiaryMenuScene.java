@@ -41,6 +41,13 @@ public class DiaryMenuScene {
         diaryMenu.getChildren().addAll(title, buttonBox);
 
 
+
+        // Button actions
+        writebutton.setOnAction(e -> {
+            Scene writeScene = DiaryWriteScene.createScene(stage);
+            stage.setScene(writeScene);
+        });
+
         // Back button action
         backbutton.setOnAction(e -> {
             Scene homeScene = HomeScene.createScene(stage);
