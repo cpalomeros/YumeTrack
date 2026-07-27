@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.util.Scanner;
 import javafx.scene.layout.HBox;
 import javafx.geometry.Pos;
+import javafx.geometry.Insets;
+
 
 
 public class DiaryReadScene {
@@ -20,6 +22,13 @@ public class DiaryReadScene {
         // Title
         Label title = new Label("• • •");
         Label noEntries = new Label();
+        title.setStyle("-fx-font-size: 40px; -fx-font-weight: bold;");
+
+        HBox titleBox = new HBox();
+        titleBox.setAlignment(Pos.TOP_CENTER);
+        titleBox.getChildren().addAll(title);
+
+        
 
         // Entry list
         ListView<File> entryList = new ListView<>();
@@ -115,17 +124,22 @@ public class DiaryReadScene {
 
 
         // Main layout
-        VBox layout = new VBox(10);
 
-        layout.getChildren().add(title);
+
+        VBox layout = new VBox(10);
 
         if (files == null || files.length == 0) {
             layout.getChildren().add(noEntries);
         } else {
+            
+            layout.getChildren().addAll(titleBox);
             layout.getChildren().addAll(entryList, entryDisplay);
         }
 
         layout.getChildren().add(bottomBox);
+        layout.setSpacing(10);
+        VBox.setMargin(entryList ,  new Insets(10 , 10 , 10 , 10));
+        VBox.setMargin(entryDisplay , new Insets(10 , 10 , 10 , 10));
 
         // Create scene
         Scene scene = new Scene(layout);
