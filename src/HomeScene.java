@@ -49,6 +49,8 @@ public class HomeScene {
             stage.setScene(diarymenu);
         });
 
+        
+
           
         Scene scene = new Scene(homelayoutBox);
         scene.getStylesheets().add("css/style.css");
