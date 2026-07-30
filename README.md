@@ -1,18 +1,33 @@
-## Getting Started
+=======
+# YumeTrack
+A personal organization and productivity app for anime and oshikatsu fans combining journaling, habit tracking, goals and calendar planning into a single experience.
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+## Features
 
-## Folder Structure
+### Current Features
+- Create and read diary entries.
+- Local data storage.
 
-The workspace contains two folders by default, where:
+### Planned Features
+- Anime/Oshikatsu based interface
+- Habit tracker
+- Goal management
+- Calendar integration
+- Edit and delete diary entries
+- Search entries
+- Progress statistics
+- Earn XP and level up by maintaining habits and achieving goals.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+--
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+## Built with:
+- Java
+- JavaFX
+- Visual Studio code
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+--
 
-## Dependency Management
+## Status:
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Project under active development. New features will be added regularly.     
+git push origin main
