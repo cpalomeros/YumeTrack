@@ -12,7 +12,7 @@ public class App extends Application {
     public void start(Stage stage) {
 
         // Window properties
-        stage.setTitle("推し活 ");
+        stage.setTitle("YumeTrack");
         stage.setWidth(600);
         stage.setHeight(800);
 
