@@ -30,4 +30,3 @@ A personal organization and productivity app for anime and oshikatsu fans combin
 ## Status:
 
 Project under active development. New features will be added regularly.     
-git push origin main
