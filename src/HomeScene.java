@@ -49,6 +49,11 @@ public class HomeScene {
             stage.setScene(diarymenu);
         });
 
+        goalbutton.setOnAction( e -> {
+            Scene goalmenu = GoalMenuScene.createScene(stage);
+            stage.setScene(goalmenu);
+        });
+
         
 
           

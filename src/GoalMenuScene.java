@@ -4,11 +4,16 @@ import javafx.scene.control.ListCell;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 
 
@@ -17,7 +22,7 @@ import javafx.scene.control.TextField;
 
 public class GoalMenuScene {
     
-    public static Scene creatScene(Stage stage){
+    public static Scene createScene(Stage stage){
 
         // Title
         Label title = new Label("Goals");
@@ -33,6 +38,7 @@ public class GoalMenuScene {
         TextArea goalDisplay = new TextArea();
         goalDisplay.setEditable(false);
         goalDisplay.setWrapText(true);
+        
 
         // Goal Folder
         File folder = new File("Goals");
@@ -48,10 +54,11 @@ public class GoalMenuScene {
             // Add files to the list
             for (File file : files) {
                 goalList.getItems().add(file);
+                goalList.refresh();
             }
 
             // Show only the goal names
-            goalList.setCellFactory(list -> new ListCell<>() {
+            goalList.setCellFactory(list -> new ListCell<File>() {
 
                 @Override
                 protected void updateItem(File file, boolean empty) {
@@ -61,10 +68,10 @@ public class GoalMenuScene {
                     if (empty || file == null) {
                         setText(null);
                     } else {
-                        setText(file.getName());
+                        setText(file.getName().replace(".txt", ""));
                     }
                 }
-            });
+            });}
 
         // Input field for new goals
 
@@ -73,46 +80,107 @@ public class GoalMenuScene {
 
         // Buttons
 
-        // - Add goal
+
         Button addGoalButton = new Button("Add Goal");
 
-        // - Remove goal
         Button removeGoalButton = new Button("Remove Goal");
         
         
-        // - Mark complete (optional)
-        Button markCompleButton = new Button("Complete");
+        Button markCompleteButton = new Button("Complete");
 
-        // - Back
         Button backButton = new Button("Back");
 
         // Button actions
 
-        // - Add goal
+
         addGoalButton.setOnAction(e -> {
-        
+
             if (!folder.exists()) {
                 folder.mkdir();
-                };
+            }
 
-            String goalName = title.getText();
+        String goalName = newGoalField.getText().trim();
+
+            if (goalName.isEmpty()) {
+            return;
+            }
 
             try {
-                FileWriter writer = new FileWriter(goalName);
+
+                File file = new File(folder, goalName + ".txt");
+                FileWriter writer = new FileWriter(file);
 
                 writer.write(goalName);
                 writer.close();
 
-             }
-        catch (IOException ex) {
-            ex.printStackTrace();
+                goalList.getItems().add(file);
+                newGoalField.clear();
+                noGoals.setVisible(false);
+                goalList.refresh();
+                goalList.setCellFactory(list -> new ListCell<File>() {
+                    @Override protected void updateItem(File file, boolean empty) {
+                    super.updateItem(file, empty);
 
-        }
-    }
-);
+                    if (empty || file == null) {
+                    setText(null);
+                    } else {
+                    setText(file.getName().replace(".txt", ""));
+                    }
+                    }
+                });
+
+
+            } catch (IOException ex) {
+                    ex.printStackTrace();
+            }
+
+    });
 
         // - Remove goal
+        removeGoalButton.setOnAction(e -> {
+            
+            File selectedFile = goalList.getSelectionModel().getSelectedItem();
+            
+            if (selectedFile == null) { return;
+            }
+            selectedFile.delete();
+            goalList.getItems().remove(selectedFile);}
+
+        );
+
         // - Mark complete
+
+        markCompleteButton.setOnAction(e -> {
+            File selectedFile = goalList.getSelectionModel().getSelectedItem();
+            if (selectedFile == null) { return;
+            }
+            if (selectedFile.getName().startsWith("✓")) {
+                return;
+            }
+            File parent = selectedFile.getParentFile();
+            String name = selectedFile.getName();
+            File newFile = new File(parent, "✓" + name );
+            selectedFile.renameTo(newFile);
+            int index = goalList.getItems().indexOf(selectedFile);
+            goalList.getItems().set(index, newFile);
+
+            goalList.setCellFactory(list -> new ListCell<File>() {
+                @Override protected void updateItem(File file, boolean empty) {
+                    super.updateItem(file, empty);
+
+                     if (empty || file == null) {
+                    setText(null);
+                    } else {
+                    setText(file.getName().replace(".txt", ""));
+                    }
+                }
+            });
+
+
+
+        });
+
+
         // - Back
         backButton.setOnAction (e -> {
         Scene homeScene = HomeScene.createScene(stage);
@@ -121,22 +189,37 @@ public class GoalMenuScene {
         });
 
         // Bottom button layout
-
+        HBox buttonBox = new HBox();
+        buttonBox.setAlignment(Pos.BOTTOM_RIGHT);
+        buttonBox.getChildren().addAll(removeGoalButton, markCompleteButton, addGoalButton ,backButton);
+        
+        
         // Main layout
-        // - Add title
-        // - Add goal list
-        // - Add input area
-        // - Add buttons
+
+        VBox mainBox = new VBox();
+        mainBox.setAlignment(Pos.CENTER);
+        mainBox.getChildren().addAll(title, noGoals, newGoalField , goalList, goalDisplay);
+        noGoals.setVisible(goalList.getItems().isEmpty());
 
 
 
 
 
+
+
+    
+    
+        BorderPane layout = new BorderPane();
+        layout.setCenter(mainBox);
+        BorderPane.setMargin(mainBox, new Insets(10, 10, 10, 10));
+        layout.setBottom(buttonBox);
 
 
         // Create scene
         Scene scene = new Scene(layout);
         return scene;
+}
 
-    }
-}}
+
+
+}
