@@ -1,37 +1,48 @@
 /* colors */
 
 .root {
-    -fx-background-color: #f1ecef;
+    -fx-background-color: linear-gradient(to bottom, #f7f4f7, #efe8ee);
     -fx-font-family: "Segoe UI";
-
 }
 
+.main-card {
+    -fx-background-color: white;
+    -fx-background-radius: 30;
 
+    -fx-padding: 35 45 35 45;
 
-/* labels */
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(90,60,90,0.12),
+        35,
+        0.15,
+        0,
+        10
+    );
+}
 
 .title {
-    -fx-font-size: 28px;
+    -fx-font-size: 34px;
     -fx-font-weight: bold;
-    -fx-text-fill: #6e3f53;
+    -fx-text-fill: #6d4b61;
 }
 
 .subtitle {
-    -fx-font-size: 16px;
-    -fx-text-fill: #777777;
+    -fx-font-size: 17px;
+    -fx-text-fill: #9b9098;
 }
 
-
-/* buttons */
-
+.version {
+    -fx-font-size: 8px;
+    -fx-text-fill: #baaeb7;
+}
 
 .yumebuttons {
-    -fx-background-color: rgb(219, 170, 217);
-    -fx-text-fill: rgb(73, 26, 71);
+    -fx-background-color: #ddb2d9;
+    -fx-background-radius: 14;
+
+    -fx-text-fill: #56304e;
+    -fx-font-size: 15px;
+
+    -fx-padding: 10 20 10 20;
 }
-
-
-
-/* text inputs */
-/* list view */
-/* scroll pane */
