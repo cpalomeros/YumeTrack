@@ -22,6 +22,7 @@ A personal organization and productivity app for anime and oshikatsu fans combin
 ## Built with:
 - Java
 - JavaFX
+- CSS
 - Visual Studio code
 
 --
