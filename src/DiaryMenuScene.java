@@ -30,7 +30,7 @@ public class DiaryMenuScene {
         );
 
         // Title
-        Label title = new Label("Diary");
+        Label title = new Label("DIARY");
         title.getStyleClass().add("title");
 
         Label divider = new Label("───── ⋆⋅☆⋅⋆ ─────");

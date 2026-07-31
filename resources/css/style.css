@@ -1,4 +1,3 @@
-/* colors */
 
 .root {
     -fx-background-color: #f6f1f5;
@@ -71,31 +70,7 @@
     -fx-background-color:#e7c0e3;
 }
 
-.text-area {
-    -fx-background-color: transparent;
-    -fx-control-inner-background: transparent;
 
-    -fx-border-color: transparent;
-
-    -fx-font-size: 17px;
-    -fx-font-family: "Georgia";
-}
-
-.text-field {
-    -fx-background-color: transparent;
-    -fx-border-color: transparent;
-
-    -fx-font-size: 20px;
-    -fx-font-weight: bold;
-}
-
-.text-area .content {
-    -fx-background-color: transparent;
-}
-
-.text-area .viewport {
-    -fx-background-color: transparent;
-}
 
 .diary-date {
     -fx-font-size: 30px;
@@ -139,4 +114,44 @@
         0,
         8
     );
+}
+
+.diary-header {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #5c3b4b;
+}
+
+.empty-diary {
+    -fx-font-size: 22px;
+    -fx-text-fill: #777777;
+}
+
+.list-view {
+    -fx-background-radius: 12;
+}
+
+.text-area {
+    -fx-font-size: 15px;
+}
+
+.entry-display {
+    -fx-background-color: white;
+    -fx-control-inner-background: white;
+    -fx-border-color: #d8c7d5;
+    -fx-border-radius: 12;
+    -fx-background-radius: 12;
+
+    -fx-text-fill: #403437;
+
+    -fx-font-size: 16px;
+    -fx-font-family: "Georgia";
+}
+
+.entry-display .content {
+    -fx-background-color: white;
+}
+
+.entry-display .viewport {
+    -fx-background-color: white;
 }

@@ -13,8 +13,8 @@ public class App extends Application {
 
         // Window properties
         stage.setTitle("YumeTrack");
-        stage.setWidth(600);
-        stage.setHeight(800);
+        stage.setWidth(1000);
+        stage.setHeight(850);
 
 
 
