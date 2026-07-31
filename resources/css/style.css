@@ -38,11 +38,80 @@
 }
 
 .yumebuttons {
-    -fx-background-color: #ddb2d9;
-    -fx-background-radius: 14;
 
-    -fx-text-fill: #56304e;
+    -fx-background-color: #ddb0d8;
+
+    -fx-background-radius: 18;
+
+    -fx-text-fill: #5a3952;
+
     -fx-font-size: 15px;
 
-    -fx-padding: 10 20 10 20;
+    -fx-padding: 10 24;
+
+    -fx-cursor: hand;
+}
+
+.yumebuttons:hover{
+
+    -fx-background-color:#e7c0e3;
+}
+
+.text-area {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+
+    -fx-border-color: transparent;
+
+    -fx-font-size: 17px;
+    -fx-font-family: "Georgia";
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+}
+
+.text-area .content {
+    -fx-background-color: transparent;
+}
+
+.text-area .viewport {
+    -fx-background-color: transparent;
+}
+
+.diary-date {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #7b5a72;
+}
+
+.diary-title {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent transparent #c9b0c3 transparent;
+    -fx-border-width: 0 0 2 0;
+
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6e3f53;
+
+    -fx-prompt-text-fill: #b89cad;
+}
+
+.diary-area{
+
+    -fx-background-color:transparent;
+
+    -fx-control-inner-background:transparent;
+
+    -fx-border-color:transparent;
+
+    -fx-font-size:18px;
+
+    -fx-font-family:"Georgia";
+
+    -fx-text-fill:#403437;
 }

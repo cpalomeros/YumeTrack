@@ -1,74 +1,91 @@
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage; 
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
 import components.yumebuttons;
 
 public class HomeScene {
-    
+
     public static Scene createScene(Stage stage) {
-        
 
-        
-        VBox homelayoutBox = new VBox();
+        // Root
+        StackPane root = new StackPane();
+        root.setAlignment(Pos.CENTER);
 
-      homelayoutBox.setAlignment(javafx.geometry.Pos.CENTER);
- 
+        // Card
+        VBox card = new VBox(18);
+        card.setAlignment(Pos.CENTER);
+        card.getStyleClass().add("main-card");
 
-        HBox diarygoalsBox = new HBox();
-     diarygoalsBox.setAlignment(javafx.geometry.Pos.CENTER);
+        card.setPrefSize(520, 380);
+        card.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
 
+        // Title
+        Label title = new Label("DASHBOARD");
+        title.getStyleClass().add("title");
 
-        yumebuttons diarybutton = new yumebuttons("Diary");
-        diarybutton.setPrefSize(125, 50);
-        
+        Label subtitle = new Label("───── ⋆⋅☆⋅⋆ ─────");
+        subtitle.getStyleClass().add("subtitle");
 
-        yumebuttons goalbutton = new yumebuttons("Goals");
-        goalbutton.setPrefSize(75, 50);
+        VBox.setMargin(title, new Insets(0, 0, 8, 0));
+        VBox.setMargin(subtitle, new Insets(0, 0, 20, 0));
 
-        yumebuttons oshibutton = new yumebuttons("Kanade");
-        oshibutton.setPrefSize(200, 100);
+        // First row
+        HBox topRow = new HBox(15);
+        topRow.setAlignment(Pos.CENTER);
 
-        yumebuttons backbutton = new yumebuttons("Back");
-        backbutton.setPrefSize(200, 50);
+        yumebuttons diaryButton = new yumebuttons("Diary");
+        diaryButton.setPrefSize(170, 60);
 
-    homelayoutBox.setSpacing(10);
- 
-        homelayoutBox.getChildren().addAll(diarygoalsBox, oshibutton, backbutton);
-        diarygoalsBox.getChildren().addAll(diarybutton, goalbutton);
-        
+        yumebuttons goalButton = new yumebuttons("Goals");
+        goalButton.setPrefSize(170, 60);
 
-        
-                backbutton.setOnAction( e -> {
-                
-            Scene mainmenu = MainMenuScene.createScene(stage);
-            stage.setScene(mainmenu);
-        });
+        topRow.getChildren().addAll(diaryButton, goalButton);
 
-        diarybutton.setOnAction( e -> {
-            Scene diarymenu = DiaryMenuScene.createScene(stage);
-            stage.setScene(diarymenu);
-        });
+        // Kanade
+        yumebuttons kanadeButton = new yumebuttons("Oshikatsu");
+        kanadeButton.setPrefSize(355, 100);
 
-        goalbutton.setOnAction( e -> {
-            Scene goalmenu = GoalMenuScene.createScene(stage);
-            stage.setScene(goalmenu);
-        });
+        // Back
+        yumebuttons backButton = new yumebuttons("Back");
+        backButton.setPrefSize(355, 45);
 
-        
+        card.getChildren().addAll(
+                title,
+                subtitle,
+                topRow,
+                kanadeButton,
+                backButton
+        );
 
-          
-        Scene scene = new Scene(homelayoutBox);
+        root.getChildren().add(card);
+
+        // Actions
+
+        backButton.setOnAction(e ->
+                stage.setScene(MainMenuScene.createScene(stage)));
+
+        diaryButton.setOnAction(e ->
+                stage.setScene(DiaryMenuScene.createScene(stage)));
+
+        goalButton.setOnAction(e ->
+                stage.setScene(GoalMenuScene.createScene(stage)));
+
+        // Scene
+
+        Scene scene = new Scene(root);
+
         scene.getStylesheets().add(
-             new java.io.File("resources/css/style.css")
-            .toURI()
-            .toString()
-            );
+                new java.io.File("resources/css/style.css")
+                        .toURI()
+                        .toString());
 
-
-  
         return scene;
-    
-    
-}
+    }
 }
