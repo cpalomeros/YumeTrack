@@ -11,9 +11,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import components.yumebuttons;
-
+import components.DiaryButtons;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -33,6 +31,7 @@ public class DiaryWriteScene {
 
         diaryImage.setFitWidth(900);
         diaryImage.setPreserveRatio(true);
+        diaryImage.setOpacity(0.67);
 
         // -------------------------------
         // Date
@@ -66,8 +65,8 @@ public class DiaryWriteScene {
         // Buttons
         // -------------------------------
 
-        yumebuttons saveButton = new yumebuttons("Save ♡");
-        yumebuttons backButton = new yumebuttons("Back");
+        DiaryButtons saveButton = new DiaryButtons("♡   Save");
+        DiaryButtons backButton = new DiaryButtons("Back");
 
         HBox buttonBox = new HBox(10, saveButton, backButton);
         buttonBox.setAlignment(Pos.CENTER);
