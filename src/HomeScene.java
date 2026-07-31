@@ -1,8 +1,8 @@
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
 import javafx.stage.Stage; 
 import javafx.scene.layout.HBox;
+import components.yumebuttons;
 
 public class HomeScene {
     
@@ -19,16 +19,17 @@ public class HomeScene {
      diarygoalsBox.setAlignment(javafx.geometry.Pos.CENTER);
 
 
-        Button diarybutton = new Button("Diary");
+        yumebuttons diarybutton = new yumebuttons("Diary");
         diarybutton.setPrefSize(125, 50);
+        
 
-        Button goalbutton = new Button("Goals");
+        yumebuttons goalbutton = new yumebuttons("Goals");
         goalbutton.setPrefSize(75, 50);
 
-        Button oshibutton = new Button("Kanade");
+        yumebuttons oshibutton = new yumebuttons("Kanade");
         oshibutton.setPrefSize(200, 100);
 
-        Button backbutton = new Button("Back");
+        yumebuttons backbutton = new yumebuttons("Back");
         backbutton.setPrefSize(200, 50);
 
     homelayoutBox.setSpacing(10);
@@ -58,7 +59,11 @@ public class HomeScene {
 
           
         Scene scene = new Scene(homelayoutBox);
-        scene.getStylesheets().add("css/style.css");
+        scene.getStylesheets().add(
+             new java.io.File("resources/css/style.css")
+            .toURI()
+            .toString()
+            );
 
 
   

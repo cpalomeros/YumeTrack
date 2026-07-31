@@ -1,0 +1,37 @@
+/* colors */
+
+.root {
+    -fx-background-color: #f1ecef;
+    -fx-font-family: "Segoe UI";
+
+}
+
+
+
+/* labels */
+
+.title {
+    -fx-font-size: 28px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6e3f53;
+}
+
+.subtitle {
+    -fx-font-size: 16px;
+    -fx-text-fill: #777777;
+}
+
+
+/* buttons */
+
+
+.yumebuttons {
+    -fx-background-color: rgb(219, 170, 217);
+    -fx-text-fill: rgb(73, 26, 71);
+}
+
+
+
+/* text inputs */
+/* list view */
+/* scroll pane */

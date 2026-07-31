@@ -1,8 +1,8 @@
 import javafx.scene.Scene;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
 import javafx.stage.Stage; 
+import components.yumebuttons;
 
 public class MainMenuScene {
     
@@ -12,11 +12,11 @@ public class MainMenuScene {
 
         VBox mainmenusceneBox = new VBox();
 
-        Button startButton = new Button("Start");
+        yumebuttons startButton = new yumebuttons("Start");
        
         HBox settingsBox = new HBox();
-        Button settingsButton = new Button("Settings");
-        Button exitButton = new Button("Exit");
+        yumebuttons settingsButton = new yumebuttons("Settings");
+        yumebuttons exitButton = new yumebuttons("Exit");
 
         // Add buttons to the layout
         mainmenusceneBox.getChildren().addAll( startButton, settingsBox );
@@ -50,9 +50,15 @@ public class MainMenuScene {
         });
     
 
+        Scene scene = new Scene(mainmenusceneBox);
+        scene.getStylesheets().add(
+            new java.io.File("resources/css/style.css")
+            .toURI()
+            .toString()
+            );
 
 
-        return new Scene(mainmenusceneBox);
+        return scene;
     
     
 } }
