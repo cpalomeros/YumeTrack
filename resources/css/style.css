@@ -155,3 +155,19 @@
 .entry-display .viewport {
     -fx-background-color: white;
 }
+
+.goalcard {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+
+    -fx-padding: 20 25 20 25;
+
+    -fx-effect: dropshadow(
+        gaussian,
+        rgba(90,60,90,0.12),
+        15,
+        0.15,
+        0,
+        5
+    );
+}

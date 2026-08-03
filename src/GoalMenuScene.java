@@ -1,9 +1,10 @@
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+
+import components.yumebuttons;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,7 +28,7 @@ public class GoalMenuScene {
         // Title
         Label title = new Label("Goals");
         Label noGoals = new Label();
-        title.setStyle("-fx-font-size: 40px; -fx-font-weight: bold;");
+          title.getStyleClass().add("diary-header");
 
         // Goal list
         ListView<File> goalList = new ListView<>();
@@ -81,14 +82,14 @@ public class GoalMenuScene {
         // Buttons
 
 
-        Button addGoalButton = new Button("Add Goal");
+        yumebuttons addGoalButton = new yumebuttons("Add Goal");
 
-        Button removeGoalButton = new Button("Remove Goal");
+        yumebuttons removeGoalButton = new yumebuttons("Remove Goal");
         
         
-        Button markCompleteButton = new Button("Complete");
+        yumebuttons markCompleteButton = new yumebuttons("Complete");
 
-        Button backButton = new Button("Back");
+        yumebuttons backButton = new yumebuttons("Back");
 
         // Button actions
 
@@ -196,7 +197,9 @@ public class GoalMenuScene {
         
         // Main layout
 
-        VBox mainBox = new VBox();
+        VBox  mainBox = new VBox();
+        mainBox.getStyleClass().add("goalcard");
+        mainBox.setSpacing(10);
         mainBox.setAlignment(Pos.CENTER);
         mainBox.getChildren().addAll(title, noGoals, newGoalField , goalList, goalDisplay);
         noGoals.setVisible(goalList.getItems().isEmpty());
@@ -210,6 +213,7 @@ public class GoalMenuScene {
     
     
         BorderPane layout = new BorderPane();
+        layout.getStyleClass().add("list-view");
         layout.setCenter(mainBox);
         BorderPane.setMargin(mainBox, new Insets(10, 10, 10, 10));
         layout.setBottom(buttonBox);
@@ -217,6 +221,13 @@ public class GoalMenuScene {
 
         // Create scene
         Scene scene = new Scene(layout);
+
+        
+        scene.getStylesheets().add(
+                new File("resources/css/style.css")
+                        .toURI()
+                        .toString());
+
         return scene;
 }
 
