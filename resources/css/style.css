@@ -188,3 +188,16 @@
     -fx-prompt-text-fill: #3f2a3a;
 
 }
+
+.goalDisplay {
+    -fx-background-color: #e7bfe1;
+    -fx-control-inner-background: #e7bfe1;
+    -fx-border-color: #aa7ba1;
+    -fx-border-radius: 15;
+    -fx-background-radius: 15;
+
+    -fx-text-fill: #403437;
+
+    -fx-font-size: 16px;
+    -fx-font-family: "Comic Sans MS";
+}

@@ -3,6 +3,8 @@ import javafx.scene.control.ListCell;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Scanner;
+
 import javafx.scene.control.DatePicker;
 import components.DiaryButtons;
 import javafx.geometry.Insets;
@@ -38,6 +40,7 @@ public class GoalMenuScene {
         // Goal display / information (optional)
                 
         TextArea goalDisplay = new TextArea();
+        goalDisplay.getStyleClass().add("goalDisplay");
         goalDisplay.setEditable(false);
         goalDisplay.setWrapText(true);
 
@@ -60,9 +63,10 @@ public class GoalMenuScene {
 
             // Add files to the list
             for (File file : files) {
-                goalList.getItems().add(file);
-                goalList.refresh();
+            goalList.getItems().add(file);
             }
+
+            goalList.refresh();
 
             // Show only the goal names
             goalList.setCellFactory(list -> new ListCell<File>() {
@@ -78,7 +82,13 @@ public class GoalMenuScene {
                         setText(file.getName().replace(".txt", ""));
                     }
                 }
-            });}
+
+
+            });
+    
+        }
+
+
 
         // Input field for new goals
 
@@ -114,6 +124,8 @@ public class GoalMenuScene {
 
     String goalName = newGoalField.getText().trim();
     String description = descriptionField.getText().trim();
+
+    
 
     if (goalName.isEmpty()) {
         return;
@@ -154,6 +166,32 @@ public class GoalMenuScene {
             }
         });
 
+                goalList.getSelectionModel().selectedItemProperty().addListener(
+                (obs, oldFile, selectedFile) -> {
+
+                    if (selectedFile == null)
+                        return;
+
+                    try (Scanner reader = new Scanner(selectedFile)) {
+
+                        StringBuilder content = new StringBuilder();
+
+                        while (reader.hasNextLine()) {
+                            content.append(reader.nextLine()).append("\n");
+                        }
+
+                        goalDisplay.setText(content.toString());
+
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+
+            goalList.getSelectionModel().selectFirst();
+
+            goalList.refresh();
+
+
     } catch (IOException ex) {
         ex.printStackTrace();
     }
@@ -167,7 +205,8 @@ public class GoalMenuScene {
             if (selectedFile == null) { return;
             }
             selectedFile.delete();
-            goalList.getItems().remove(selectedFile);}
+            goalList.getItems().remove(selectedFile);
+        }
 
         );
 
@@ -234,6 +273,8 @@ public class GoalMenuScene {
         mainBox.setSpacing(10);
         mainBox.setAlignment(Pos.CENTER);
         mainBox.getChildren().addAll(title, noGoals, goalBox,descriptionField, goalList, goalDisplay);
+        VBox.setVgrow(goalDisplay, Priority.ALWAYS);
+        VBox.setSize(goalList, 200, 200);
         noGoals.setVisible(goalList.getItems().isEmpty());
 
 
