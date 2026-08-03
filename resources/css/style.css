@@ -171,3 +171,20 @@
         5
     );
 }
+
+.newgoal {
+    -fx-background-color: #e7bfe1;
+
+    -fx-background-radius: 12;
+
+    -fx-text-fill: #6d4763;
+
+    -fx-font-size: 15px;
+
+    -fx-padding: 10 24;
+
+    -fx-cursor: hand;
+
+    -fx-prompt-text-fill: #3f2a3a;
+
+}

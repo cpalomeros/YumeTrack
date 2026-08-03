@@ -3,8 +3,8 @@ import javafx.scene.control.ListCell;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-
-import components.yumebuttons;
+import javafx.scene.control.DatePicker;
+import components.DiaryButtons;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -14,6 +14,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 
 
@@ -39,6 +40,11 @@ public class GoalMenuScene {
         TextArea goalDisplay = new TextArea();
         goalDisplay.setEditable(false);
         goalDisplay.setWrapText(true);
+
+        DatePicker dueDatePicker = new DatePicker();
+        dueDatePicker.setPromptText("Goal Due Date");
+
+
         
 
         // Goal Folder
@@ -78,65 +84,81 @@ public class GoalMenuScene {
 
         TextField newGoalField = new TextField();
         newGoalField.setPromptText("What's next...?");
+        newGoalField.getStyleClass().add("newgoal");
 
+
+        TextArea descriptionField = new TextArea();
+        descriptionField.setPromptText("Description");
+        descriptionField.setWrapText(true);
+        descriptionField.setPrefRowCount(3);
         // Buttons
 
 
-        yumebuttons addGoalButton = new yumebuttons("Add Goal");
+        DiaryButtons addGoalButton = new DiaryButtons("Add Goal");
 
-        yumebuttons removeGoalButton = new yumebuttons("Remove Goal");
+        DiaryButtons removeGoalButton = new DiaryButtons("Remove Goal");
         
         
-        yumebuttons markCompleteButton = new yumebuttons("Complete");
+        DiaryButtons markCompleteButton = new DiaryButtons("Complete");
 
-        yumebuttons backButton = new yumebuttons("Back");
+        DiaryButtons backButton = new DiaryButtons("Back");
 
         // Button actions
 
 
-        addGoalButton.setOnAction(e -> {
+    addGoalButton.setOnAction(e -> {
 
-            if (!folder.exists()) {
-                folder.mkdir();
-            }
+    if (!folder.exists()) {
+        folder.mkdir();
+    }
 
-        String goalName = newGoalField.getText().trim();
+    String goalName = newGoalField.getText().trim();
+    String description = descriptionField.getText().trim();
 
-            if (goalName.isEmpty()) {
-            return;
-            }
+    if (goalName.isEmpty()) {
+        return;
+    }
 
-            try {
+    try {
 
-                File file = new File(folder, goalName + ".txt");
-                FileWriter writer = new FileWriter(file);
+        File file = new File(folder, goalName + ".txt");
+        FileWriter writer = new FileWriter(file);
 
-                writer.write(goalName);
-                writer.close();
+        writer.write("Goal: " + goalName + "\n\n");
+        writer.write("Description:\n");
+        writer.write(description + "\n\n");
+        writer.write("Due Date: " + dueDatePicker.getValue() + "\n");
+        writer.write("STATUS: Not Completed\n");
 
-                goalList.getItems().add(file);
-                newGoalField.clear();
-                noGoals.setVisible(false);
-                goalList.refresh();
-                goalList.setCellFactory(list -> new ListCell<File>() {
-                    @Override protected void updateItem(File file, boolean empty) {
-                    super.updateItem(file, empty);
+        writer.close();
 
-                    if (empty || file == null) {
+        goalList.getItems().add(file);
+
+        newGoalField.clear();
+        descriptionField.clear();
+        dueDatePicker.setValue(null);
+
+        noGoals.setVisible(false);
+        goalList.refresh();
+
+        goalList.setCellFactory(list -> new ListCell<File>() {
+            @Override
+            protected void updateItem(File file, boolean empty) {
+                super.updateItem(file, empty);
+
+                if (empty || file == null) {
                     setText(null);
-                    } else {
+                } else {
                     setText(file.getName().replace(".txt", ""));
-                    }
-                    }
-                });
-
-
-            } catch (IOException ex) {
-                    ex.printStackTrace();
+                }
             }
+        });
 
-    });
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }
 
+});
         // - Remove goal
         removeGoalButton.setOnAction(e -> {
             
@@ -182,6 +204,8 @@ public class GoalMenuScene {
         });
 
 
+
+
         // - Back
         backButton.setOnAction (e -> {
         Scene homeScene = HomeScene.createScene(stage);
@@ -191,9 +215,17 @@ public class GoalMenuScene {
 
         // Bottom button layout
         HBox buttonBox = new HBox();
-        buttonBox.setAlignment(Pos.BOTTOM_RIGHT);
+        buttonBox.setAlignment(Pos.BOTTOM_CENTER);
+        buttonBox.setSpacing(10);
+        buttonBox.setPadding(new Insets(10, 10, 10, 10));
         buttonBox.getChildren().addAll(removeGoalButton, markCompleteButton, addGoalButton ,backButton);
         
+        HBox goalBox = new HBox();
+        goalBox.setAlignment(Pos.CENTER);
+        goalBox.setSpacing(10);
+        goalBox.getChildren().addAll(newGoalField, dueDatePicker);
+        HBox.setHgrow(newGoalField, Priority.ALWAYS);
+        newGoalField.setMaxWidth(Double.MAX_VALUE);
         
         // Main layout
 
@@ -201,7 +233,7 @@ public class GoalMenuScene {
         mainBox.getStyleClass().add("goalcard");
         mainBox.setSpacing(10);
         mainBox.setAlignment(Pos.CENTER);
-        mainBox.getChildren().addAll(title, noGoals, newGoalField , goalList, goalDisplay);
+        mainBox.getChildren().addAll(title, noGoals, goalBox,descriptionField, goalList, goalDisplay);
         noGoals.setVisible(goalList.getItems().isEmpty());
 
 
